@@ -23,13 +23,17 @@
     <string name="login_message">Explore all of student\'s experience and story when learning in Bangkit, and you can also share your story here ✍️</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
-    <string name="dont_have_account">don't have account yet</string>
+    <string name="dont_have_account">don\'t have account yet</string>
+    <string name="login_success_message">Login success</string>
+    <string name="login_error_message">Login failed, please try again.</string>
 
     <!-- Register  -->
     <string name="already_have_an_account">Already have an account?</string>
     <string name="register_title">Let\'s create new account</string>
-    <string name="register_message">Don't have an account? \nLet\'s create an account for you here ✨</string>
+    <string name="register_message">Don\'t have an account? \nLet\'s create an account for you here ✨</string>
     <string name="full_name">Full name</string>
+    <string name="registration_success">Registration success</string>
+    <string name="registration_error_message">Registration failed, please try again.</string>
 
     <!-- Component View -->
     <string name="emailHint">Email</string>
