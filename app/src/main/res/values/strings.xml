@@ -1,3 +1,52 @@
 <resources>
-    <string name="app_name">sm_intermediate_david</string>
+    <string name="app_name">MyStoryApp</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Layout Item   -->
+    <string name="dummy_name" translatable="false">David Nasrulloh</string>
+    <string name="dummy_description" translatable="false">Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsu....</string>
+    <string name="dummy_date" translatable="false">April 6, 2022</string>
+    <string name="story_s_illustration">Story\'s illustration</string>
+
+
+    <!-- Main Activity   -->
+    <string name="story">Story Bangkit</string>
+    <string name="create_story">Create story</string>
+    <string name="no_data">No data</string>
+    <string name="stories_not_found_empty">Stories not found</string>
+
+    <!--  Login  -->
+    <string name="person_with_illustration">Person login illustration</string>
+    <string name="login_title">Hello, let\'s sign in</string>
+    <string name="login_bangkit">Bangkit Story</string>
+    <string name="login_message">Explore all of student\'s experience and story when learning in Bangkit, and you can also share your story here ✍️</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="dont_have_account">don\'t have account yet</string>
+    <string name="login_success_message">Login success</string>
+    <string name="login_error_message">Login failed, please try again.</string>
+
+    <!-- Register  -->
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="register_title">Let\'s create new account</string>
+    <string name="register_message">Don\'t have an account? \nLet\'s create an account for you here ✨</string>
+    <string name="full_name">Full name</string>
+    <string name="registration_success">Registration success</string>
+    <string name="registration_error_message">Registration failed, please try again.</string>
+
+    <!-- Component View -->
+    <string name="emailHint">Email</string>
+    <string name="email_error_message">Email address is not valid</string>
+    <string name="password">Password</string>
+    <string name="password_error_message">Passwords must be at least 8 characters</string>
+
+    <!-- Story -->
+    <string name="add_story_title">Add Story</string>
+    <string name="select_image">Select image from</string>
+    <string name="select_from_camera">Camera</string>
+    <string name="select_from_gallery">Gallery</string>
+    <string name="write_a_description">Write a description</string>
+
+
 </resources>
