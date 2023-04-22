@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">MyStoryApp</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Layout Item   -->
+    <string name="dummy_name" translatable="false">David Nasrulloh</string>
+    <string name="dummy_description" translatable="false">Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsu....</string>
+    <string name="dummy_date" translatable="false">April 6, 2022</string>
+    <string name="story_s_illustration">Story\'s ilustrasi</string>
+
+
+    <!-- Main Activity   -->
+    <string name="story">Story Bangkit</string>
+    <string name="create_story">Buat Story</string>
+    <string name="no_data">Tidak ada data</string>
+    <string name="stories_not_found_empty">Stories tidak ditemukan</string>
+
+    <!--  Login  -->
+    <string name="person_with_illustration">Ilustrasi Person login</string>
+    <string name="login_title">Hallo, yuk sign in</string>
+    <string name="login_bangkit">Bangkit Story</string>
+    <string name="login_message">Explore semua pengalaman and cerita kalian ketika belajar di Bangkit, dan tentunya kamu bisa share cerita kamu disini ✍️</string>
+    <string name="login">Masuk</string>
+    <string name="register">Daftar</string>
+    <string name="dont_have_account">Belum punya akun?</string>
+    <string name="login_success_message">Login berhasil</string>
+    <string name="login_error_message">Login gagal, silahkan coba ulang.</string>
+
+    <!-- Register  -->
+    <string name="already_have_an_account">Sudah punya akun ?</string>
+    <string name="register_title">Yuk buat akun baru</string>
+    <string name="register_message">Belum memiliki akun ? Yuk.. buat akun hanya untuk kamu disini ✨</string>
+    <string name="full_name">Nama lengkap</string>
+    <string name="registration_success">Pendaftaran berhasil</string>
+    <string name="registration_error_message">Pendaftaran gagal, silahkan coba lagi.</string>
+
+    <!-- Component View -->
+    <string name="emailHint">Email</string>
+    <string name="email_error_message">Alamat email tidak valid</string>
+    <string name="password">Password</string>
+    <string name="password_error_message">Passwords minimal terdiri dari 8 karakter</string>
+
+    <!-- Story -->
+    <string name="add_story_title">Tambah Story</string>
+    <string name="select_image">Pilih gambar dari</string>
+    <string name="select_from_camera">Kamera</string>
+    <string name="select_from_gallery">Galeri</string>
+    <string name="write_a_description">Tulis deskripsi</string>
+    <string name="upload_story">Unggah Story</string>
+    <string name="error_occurred_message">Terjadi kesalahan</string>
+    <string name="detail_toolbar_title">%s\'s story</string>
+    <string name="desc_empty_field_error">Silahkan isi kolom deskripsi dibawah</string>
+    <string name="empty_image_error">Silahkan pilih gambar terlebih dahulu</string>
+    <string name="story_upload">Story berhasil diunggah</string>
+    <string name="image_upload_failed">Story gagal diunggah</string>
+
+    <!-- Menu   -->
+    <string name="language_setting">Setting Bahasa</string>
+    <string name="logout">Keluar</string>
+
+</resources>

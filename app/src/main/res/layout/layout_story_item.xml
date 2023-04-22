@@ -11,7 +11,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="4dp"
+        android:backgroundTint="@color/light_blue"
+        app:cardCornerRadius="8dp"
         app:cardElevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,19 +21,6 @@
             android:paddingTop="8dp"
             android:paddingBottom="16dp">
 
-            <TextView
-                android:id="@+id/tv_story_username"
-                style="@style/Text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="@string/dummy_name" />
-
             <ImageView
                 android:id="@+id/iv_story_image"
                 android:layout_width="match_parent"
@@ -40,21 +28,25 @@
                 android:layout_marginTop="8dp"
                 android:contentDescription="@string/story_s_illustration"
                 android:scaleType="centerCrop"
+                android:layout_marginHorizontal="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_story_date"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/image_traveling" />
 
             <TextView
-                android:id="@+id/tv_story_description"
-                android:layout_width="0dp"
+                android:id="@+id/tv_story_username"
+                style="@style/Text"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_story_image"
-                tools:text="@string/dummy_description" />
+                app:layout_constraintTop_toBottomOf="@+id/iv_story_image"
+                tools:text="@string/dummy_name" />
 
             <TextView
                 android:id="@+id/tv_story_date"
@@ -69,6 +61,20 @@
                 app:layout_constraintStart_toStartOf="@+id/tv_story_username"
                 app:layout_constraintTop_toBottomOf="@+id/tv_story_username"
                 tools:text="@string/dummy_date" />
+
+
+            <TextView
+                android:id="@+id/tv_story_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_story_date"
+                tools:text="@string/dummy_description" />
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

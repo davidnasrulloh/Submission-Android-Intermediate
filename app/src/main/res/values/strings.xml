@@ -47,6 +47,16 @@
     <string name="select_from_camera">Camera</string>
     <string name="select_from_gallery">Gallery</string>
     <string name="write_a_description">Write a description</string>
+    <string name="upload_story">Upload Story</string>
+    <string name="error_occurred_message">An error occurred</string>
+    <string name="detail_toolbar_title">%s\'s story</string>
+    <string name="desc_empty_field_error">Please fill the description field</string>
+    <string name="empty_image_error">Please select an image</string>
+    <string name="story_upload">Story uploaded</string>
+    <string name="image_upload_failed">Story upload failed</string>
 
+    <!-- Menu   -->
+    <string name="language_setting">Language Setting</string>
+    <string name="logout">Logout</string>
 
 </resources>
