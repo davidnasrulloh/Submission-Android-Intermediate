@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/dark_blue_500" />
+        app:titleTextColor="@color/white" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -59,12 +59,15 @@
 
             <ImageView
                 android:id="@+id/iv_story_image"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginTop="16dp"
                 android:contentDescription="@string/story_s_illustration"
                 android:transitionName="story_image"
+                android:scaleType="matrix"
+                tools:scaleType=""
                 tools:layout_height="400dp"
+                tools:layout_width="400dp"
                 android:layout_marginHorizontal="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
