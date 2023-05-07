@@ -4,21 +4,20 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.davidnasrulloh.sm_intermediate_david.data.remote.response.Story
+import com.davidnasrulloh.sm_intermediate_david.data.local.entity.Story
 import com.davidnasrulloh.sm_intermediate_david.databinding.LayoutStoryItemBinding
 import com.davidnasrulloh.sm_intermediate_david.ui.story.detail.DetailStoryActivity
 import com.davidnasrulloh.sm_intermediate_david.ui.story.detail.DetailStoryActivity.Companion.EXTRA_DETAIL
 import com.davidnasrulloh.sm_intermediate_david.utils.setImageFromUrl
 import com.davidnasrulloh.sm_intermediate_david.utils.setLocalDateFormat
 
-class StoryListAdapter : ListAdapter<Story, StoryListAdapter.ViewHolder>(DiffCallback) {
+class StoryListAdapter : PagingDataAdapter<Story, StoryListAdapter.ViewHolder>(DiffCallback) {
 
     companion object {
         private val DiffCallback = object : DiffUtil.ItemCallback<Story>() {
@@ -62,13 +61,16 @@ class StoryListAdapter : ListAdapter<Story, StoryListAdapter.ViewHolder>(DiffCal
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoryListAdapter.ViewHolder {
-        val binding = LayoutStoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding =
+            LayoutStoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: StoryListAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val story = getItem(position)
-        holder.bind(holder.itemView.context, story)
+        if (story != null) {
+            holder.bind(holder.itemView.context, story)
+        }
     }
 }
