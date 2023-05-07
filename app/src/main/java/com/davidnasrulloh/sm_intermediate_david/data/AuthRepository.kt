@@ -1,4 +1,4 @@
-package com.davidnasrulloh.sm_intermediate_david.data.remote
+package com.davidnasrulloh.sm_intermediate_david.data
 
 import com.davidnasrulloh.sm_intermediate_david.data.local.AuthPreferencesDataSource
 import com.davidnasrulloh.sm_intermediate_david.data.remote.response.LoginResponse

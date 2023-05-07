@@ -8,6 +8,7 @@
     <string name="dummy_description" translatable="false">Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsu....</string>
     <string name="dummy_date" translatable="false">April 6, 2022</string>
     <string name="story_s_illustration">Story\'s illustration</string>
+    <string name="retry">Retry</string>
 
 
     <!-- Main Activity   -->
@@ -58,5 +59,7 @@
     <!-- Menu   -->
     <string name="language_setting">Language Setting</string>
     <string name="logout">Logout</string>
+    <string name="title_home">Story Bangkit</string>
+    <string name="location">Location</string>
 
 </resources>

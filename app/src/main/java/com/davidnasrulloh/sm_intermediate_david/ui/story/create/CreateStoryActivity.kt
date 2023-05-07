@@ -13,6 +13,7 @@ import androidx.activity.viewModels
 import androidx.core.content.FileProvider
 import androidx.exifinterface.media.ExifInterface
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.ExperimentalPagingApi
 import com.bumptech.glide.load.resource.bitmap.TransformationUtils
 import com.davidnasrulloh.sm_intermediate_david.R
 import com.davidnasrulloh.sm_intermediate_david.databinding.ActivityCreateStoryBinding
@@ -32,6 +33,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
 
+@ExperimentalPagingApi
 @AndroidEntryPoint
 class CreateStoryActivity : AppCompatActivity() {
 

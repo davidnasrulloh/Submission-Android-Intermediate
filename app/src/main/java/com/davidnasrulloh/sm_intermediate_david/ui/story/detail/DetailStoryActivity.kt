@@ -9,7 +9,7 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.davidnasrulloh.sm_intermediate_david.R
-import com.davidnasrulloh.sm_intermediate_david.data.remote.response.Story
+import com.davidnasrulloh.sm_intermediate_david.data.local.entity.Story
 import com.davidnasrulloh.sm_intermediate_david.databinding.ActivityDetailStoryBinding
 import com.davidnasrulloh.sm_intermediate_david.utils.setLocalDateFormat
 

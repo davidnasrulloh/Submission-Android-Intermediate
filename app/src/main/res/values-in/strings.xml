@@ -8,6 +8,7 @@
     <string name="dummy_description" translatable="false">Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsu....</string>
     <string name="dummy_date" translatable="false">April 6, 2022</string>
     <string name="story_s_illustration">Story\'s ilustrasi</string>
+    <string name="retry">Ulangi</string>
 
 
     <!-- Main Activity   -->
@@ -58,5 +59,7 @@
     <!-- Menu   -->
     <string name="language_setting">Setting Bahasa</string>
     <string name="logout">Keluar</string>
+    <string name="title_home">Cerita Bangkit</string>
+    <string name="location">Lokasi</string>
 
 </resources>
