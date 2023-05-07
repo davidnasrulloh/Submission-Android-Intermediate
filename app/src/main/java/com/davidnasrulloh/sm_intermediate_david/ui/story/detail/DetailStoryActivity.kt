@@ -47,6 +47,7 @@ class DetailStoryActivity : AppCompatActivity() {
                 tvStoryDescription.text = story.description
                 toolbar.title = getString(R.string.detail_toolbar_title, story.name)
                 tvStoryDate.setLocalDateFormat(story.createdAt)
+                tvLocation.text = "Lat : " + story.lat.toString() + " " + "Lon : " + story.lon.toString()
 
                 Glide
                     .with(this@DetailStoryActivity)

@@ -55,11 +55,20 @@
     <string name="empty_image_error">Silahkan pilih gambar terlebih dahulu</string>
     <string name="story_upload">Story berhasil diunggah</string>
     <string name="image_upload_failed">Story gagal diunggah</string>
+    <string name="share_location">Share lokasi kamu</string>
 
     <!-- Menu   -->
     <string name="language_setting">Setting Bahasa</string>
     <string name="logout">Keluar</string>
     <string name="title_home">Cerita Bangkit</string>
     <string name="location">Lokasi</string>
+    <string name="please_activate_location_message">Tolong aktifkan location service kamu</string>
+    <string name="location_permission_denied">Permission lokasi tidak diijinkan</string>
+    <string name="location_permission_denied_action">Ubah setting</string>
+    <string name="normal_type">Normal</string>
+    <string name="satellite_type">Satelit</string>
+    <string name="terrain_type">Terrain</string>
+    <string name="hybrid_type">Hybrid</string>
+
 
 </resources>
