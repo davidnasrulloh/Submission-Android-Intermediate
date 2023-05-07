@@ -7,7 +7,9 @@
     <string name="dummy_name" translatable="false">David Nasrulloh</string>
     <string name="dummy_description" translatable="false">Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsu....</string>
     <string name="dummy_date" translatable="false">April 6, 2022</string>
+    <string name="dummy_location" translatable="false">-012989120901</string>
     <string name="story_s_illustration">Story\'s illustration</string>
+    <string name="retry">Retry</string>
 
 
     <!-- Main Activity   -->
@@ -54,9 +56,19 @@
     <string name="empty_image_error">Please select an image</string>
     <string name="story_upload">Story uploaded</string>
     <string name="image_upload_failed">Story upload failed</string>
+    <string name="share_location">Share your location</string>
 
     <!-- Menu   -->
     <string name="language_setting">Language Setting</string>
     <string name="logout">Logout</string>
+    <string name="title_home">Story Bangkit</string>
+    <string name="location">Location</string>
+    <string name="please_activate_location_message">Please active your location service</string>
+    <string name="location_permission_denied">Location permission not allowed</string>
+    <string name="location_permission_denied_action">Change setting</string>
+    <string name="normal_type">Normal</string>
+    <string name="satellite_type">Satellite</string>
+    <string name="terrain_type">Terrain</string>
+    <string name="hybrid_type">Hybrid</string>
 
 </resources>

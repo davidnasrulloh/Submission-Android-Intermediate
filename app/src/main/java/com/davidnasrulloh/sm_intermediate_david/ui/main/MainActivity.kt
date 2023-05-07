@@ -8,10 +8,11 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.davidnasrulloh.sm_intermediate_david.R
 import com.davidnasrulloh.sm_intermediate_david.adapter.StoryListAdapter
@@ -20,9 +21,9 @@ import com.davidnasrulloh.sm_intermediate_david.databinding.ActivityMainBinding
 import com.davidnasrulloh.sm_intermediate_david.ui.auth.AuthActivity
 import com.davidnasrulloh.sm_intermediate_david.ui.story.create.CreateStoryActivity
 import com.davidnasrulloh.sm_intermediate_david.utils.animateVisibility
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -42,20 +43,24 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Set up toolbar
         setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayShowTitleEnabled(true)
 
-        token = intent.getStringExtra(EXTRA_TOKEN)!!
+        // Bottom navigation
+        val navView = binding.navView
 
-        setSwipeRefreshLayout()
-        setRecyclerView()
-        getAllStories()
+        val navController = findNavController(R.id.nav_host_fragment_activity_home)
 
-        binding.fabCreateStory.setOnClickListener{
-            Intent(this, CreateStoryActivity::class.java).also {
-                startActivity(it)
-            }
-        }
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_home) as NavHostFragment
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_home, R.id.navigation_location
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -82,66 +87,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setRecyclerView(){
-        val linearLayoutManager = LinearLayoutManager(this)
-        listAdapter = StoryListAdapter()
-
-        recyclerView = binding.rvStories
-        recyclerView.apply {
-            adapter = listAdapter
-            layoutManager = linearLayoutManager
-        }
-    }
-
-    private fun updateRecyclerViewData(stories: List<Story>) {
-        val recyclerViewState = recyclerView.layoutManager?.onSaveInstanceState()
-        listAdapter.submitList(stories)
-        recyclerView.layoutManager?.onRestoreInstanceState(recyclerViewState)
-    }
-
-    private fun getAllStories(){
-        binding.viewLoading.animateVisibility(true)
-        binding.swipeRefresh.isRefreshing = true
-
-        lifecycleScope.launch {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED){
-                viewModel.getAllStories(token).collect{result ->
-                    result.onSuccess { response ->
-                        updateRecyclerViewData(response.stories)
-
-                        binding.apply {
-                            tvNotFoundStory.animateVisibility(response.stories.isEmpty())
-                            ivNotFoundStory.animateVisibility(response.stories.isEmpty())
-                            rvStories.animateVisibility(response.stories.isNotEmpty())
-                            viewLoading.animateVisibility(false)
-                            swipeRefresh.isRefreshing = false
-                        }
-                    }
-
-                    result.onFailure {
-                        Toast.makeText(
-                            this@MainActivity,
-                            getString(R.string.error_occurred_message),
-                            Toast.LENGTH_SHORT
-                        ).show()
-
-                        binding.apply {
-                            tvNotFoundStory.animateVisibility(true)
-                            ivNotFoundStory.animateVisibility(true)
-                            rvStories.animateVisibility(false)
-                            viewLoading.animateVisibility(false)
-                            swipeRefresh.isRefreshing = false
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private fun setSwipeRefreshLayout(){
-        binding.swipeRefresh.setOnRefreshListener {
-            getAllStories()
-            binding.viewLoading.animateVisibility(false)
-        }
-    }
 }
