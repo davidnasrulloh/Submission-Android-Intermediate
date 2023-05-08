@@ -62,7 +62,7 @@ class StoryRemoteMediator(
                     // Save RemoteKeys information to database
                     database.remoteKeysDao().insertAll(keys)
 
-                    // Convert StoryResponseItem class to Story class
+                    // Convert StoryResponseItem class to StoryResponseItem class
                     // We need to convert because the response from API is different from local database Entity
                     responseData.stories.forEach { storyResponseItem ->
                         val story = Story(
@@ -75,7 +75,7 @@ class StoryRemoteMediator(
                             storyResponseItem.lat
                         )
 
-                        // Save Story to the local database
+                        // Save StoryResponseItem to the local database
                         database.storyDao().insertStory(story)
                     }
                 }

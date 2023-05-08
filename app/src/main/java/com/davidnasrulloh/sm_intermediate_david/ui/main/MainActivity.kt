@@ -16,12 +16,8 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.davidnasrulloh.sm_intermediate_david.R
 import com.davidnasrulloh.sm_intermediate_david.adapter.StoryListAdapter
-import com.davidnasrulloh.sm_intermediate_david.data.remote.response.Story
 import com.davidnasrulloh.sm_intermediate_david.databinding.ActivityMainBinding
 import com.davidnasrulloh.sm_intermediate_david.ui.auth.AuthActivity
-import com.davidnasrulloh.sm_intermediate_david.ui.story.create.CreateStoryActivity
-import com.davidnasrulloh.sm_intermediate_david.utils.animateVisibility
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 

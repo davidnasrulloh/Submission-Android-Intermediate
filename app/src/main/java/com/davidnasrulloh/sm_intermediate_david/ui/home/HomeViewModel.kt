@@ -16,10 +16,9 @@ import javax.inject.Inject
 @ExperimentalPagingApi
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val authRepository: AuthRepository,
     private val storyRepository: StoryRepository
 ): ViewModel() {
 
     fun getAllStories(token: String): LiveData<PagingData<Story>> =
-        storyRepository.getAllStories(token).cachedIn(viewModelScope).asLiveData()
+        storyRepository.getAllStories(token).cachedIn(viewModelScope)
 }
