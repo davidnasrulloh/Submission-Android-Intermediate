@@ -43,7 +43,7 @@
     <string name="password">Password</string>
     <string name="password_error_message">Passwords must be at least 8 characters</string>
 
-    <!-- Story -->
+    <!-- StoryResponseItem -->
     <string name="add_story_title">Add Story</string>
     <string name="select_image">Select image from</string>
     <string name="select_from_camera">Camera</string>

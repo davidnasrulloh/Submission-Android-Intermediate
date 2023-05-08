@@ -1,9 +1,11 @@
 package com.davidnasrulloh.sm_intermediate_david.data
 
+import androidx.lifecycle.LiveData
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.davidnasrulloh.sm_intermediate_david.data.local.entity.Story
 import com.davidnasrulloh.sm_intermediate_david.data.local.room.StoryDatabase
 import com.davidnasrulloh.sm_intermediate_david.data.remote.StoryRemoteMediator
@@ -24,7 +26,7 @@ class StoryRepository @Inject constructor(
     private val storyDatabase: StoryDatabase,
     private val apiService: ApiService,
 ) {
-    fun getAllStories(token: String): Flow<PagingData<Story>> {
+    fun getAllStories(token: String): LiveData<PagingData<Story>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 10,
@@ -37,7 +39,7 @@ class StoryRepository @Inject constructor(
             pagingSourceFactory = {
                 storyDatabase.storyDao().getAllStories()
             }
-        ).flow
+        ).liveData
     }
 
     fun getAllStoriesWithLocation(token: String): Flow<Result<StoriesResponse>> = flow {
