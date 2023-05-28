@@ -31,6 +31,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -70,21 +71,21 @@ class CreateStoryActivity : AppCompatActivity() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         lifecycleScope.launch {
-            viewModel.getAuthToken().collect{authToken ->
-                if(!authToken.isNullOrEmpty()) token = authToken
-            }
+            token = viewModel.getAuthToken().firstOrNull() ?: ""
         }
 
-        binding.btnCamera.setOnClickListener { startIntentCamera() }
-        binding.btnGallery.setOnClickListener { startIntentGallery() }
-        binding.switchLocation.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                getLastLocation()
-            } else {
-                this.location = null
+        binding.apply {
+            btnCamera.setOnClickListener { startIntentCamera() }
+            btnGallery.setOnClickListener { startIntentGallery() }
+            switchLocation.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    getLastLocation()
+                } else {
+                    location = null
+                }
             }
+            buttonAdd.setOnClickListener { uploadStory() }
         }
-        binding.buttonAdd.setOnClickListener {uploadStory()}
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -100,16 +101,11 @@ class CreateStoryActivity : AppCompatActivity() {
         ) {
             // Location permission granted
             fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-                if (location != null) {
-                    this.location = location
-                    Log.d(TAG, "getLastLocation: ${location.latitude}, ${location.longitude}")
-                } else {
-                    Toast.makeText(
-                        this,
-                        getString(R.string.please_activate_location_message),
-                        Toast.LENGTH_SHORT
-                    ).show()
-
+                location?.let {
+                    this.location = it
+                    Log.d(TAG, "getLastLocation: ${it.latitude}, ${it.longitude}")
+                } ?: run {
+                    showToast(R.string.please_activate_location_message)
                     binding.switchLocation.isChecked = false
                 }
             }
@@ -240,14 +236,13 @@ class CreateStoryActivity : AppCompatActivity() {
     }
 
     // Launcher dari Galery
-    private val launcherIntentGallery = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
+    private val launcherIntentGallery = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == RESULT_OK) {
-            val selectedImg: Uri = result.data?.data as Uri
-            uriToFile(selectedImg, this).also { getFile = it }
-
-            binding.imageView.setImageURI(selectedImg)
+            val selectedImg: Uri? = result.data?.data
+            selectedImg?.let {
+                uriToFile(selectedImg, this)?.also { getFile = it }
+                binding.imageView.setImageURI(selectedImg)
+            }
         }
     }
 
@@ -257,16 +252,13 @@ class CreateStoryActivity : AppCompatActivity() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         intent.resolveActivity(packageManager)
 
-        MediaUtility.createTempFile(application).also {
-            val photoUri = FileProvider.getUriForFile(
-                this,
-                "com.davidnasrulloh.sm_intermediate_david",
-                it
-            )
-            currentPhotoPath = it.absolutePath
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
-            launcherIntentCamera.launch(intent)
-        }
+        val photoFile = MediaUtility.createTempFile(application)
+        val photoUri = FileProvider.getUriForFile(
+            this, "com.davidnasrulloh.sm_intermediate_david", photoFile
+        )
+        currentPhotoPath = photoFile.absolutePath
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
+        launcherIntentCamera.launch(intent)
     }
 
     // Intent to Galery
@@ -312,6 +304,10 @@ class CreateStoryActivity : AppCompatActivity() {
                 binding.switchLocation.isChecked = false
             }
         }
+    }
+
+    private fun showToast(message: Int) {
+        Toast.makeText(this, getString(message), Toast.LENGTH_SHORT).show()
     }
 
     companion object {

@@ -3,7 +3,7 @@ package com.davidnasrulloh.sm_intermediate_david.data.remote.retrofit
 import com.davidnasrulloh.sm_intermediate_david.data.remote.response.FileUploadResponse
 import com.davidnasrulloh.sm_intermediate_david.data.remote.response.LoginResponse
 import com.davidnasrulloh.sm_intermediate_david.data.remote.response.RegisterResponse
-import com.davidnasrulloh.sm_intermediate_david.data.remote.response.StoriesResponse
+import com.davidnasrulloh.sm_intermediate_david.data.remote.response.StoryResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
@@ -30,7 +30,7 @@ interface ApiService {
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null,
         @Query("location") location: Int? = null
-    ): StoriesResponse
+    ): StoryResponse
 
     @Multipart
     @POST("stories")

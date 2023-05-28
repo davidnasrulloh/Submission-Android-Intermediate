@@ -2,7 +2,6 @@ package com.davidnasrulloh.sm_intermediate_david.ui.auth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.davidnasrulloh.sm_intermediate_david.R
 import com.davidnasrulloh.sm_intermediate_david.databinding.ActivityAuthBinding
 import dagger.hilt.android.AndroidEntryPoint
 

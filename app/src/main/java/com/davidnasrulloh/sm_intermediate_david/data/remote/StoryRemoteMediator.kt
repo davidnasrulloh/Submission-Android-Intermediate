@@ -28,63 +28,51 @@ class StoryRemoteMediator(
             }
             LoadType.PREPEND -> {
                 val remoteKeys = getRemoteKeyForFirstItem(state)
-                val prevKey = remoteKeys?.prevKey ?: return MediatorResult.Success(
-                    endOfPaginationReached = remoteKeys != null
-                )
-                prevKey
+                remoteKeys?.prevKey ?: return MediatorResult.Success(endOfPaginationReached = remoteKeys != null)
             }
             LoadType.APPEND -> {
                 val remoteKeys = getRemoteKeysForLastItem(state)
-                val nextKey = remoteKeys?.nextKey ?: return MediatorResult.Success(
-                    endOfPaginationReached = remoteKeys != null
-                )
-                nextKey
+                remoteKeys?.nextKey ?: return MediatorResult.Success(endOfPaginationReached = remoteKeys != null)
             }
         }
 
-        wrapEspressoIdlingResource {
-            try {
-                val responseData = apiService.getAllStories(token, page, state.config.pageSize)
-                val endOfPaginationReached = responseData.stories.isEmpty()
+        try {
+            val responseData = apiService.getAllStories(token, page, state.config.pageSize)
+            val endOfPaginationReached = responseData.stories.isEmpty()
 
-                database.withTransaction {
-                    if (loadType == LoadType.REFRESH) {
-                        database.remoteKeysDao().deleteRemoteKeys()
-                        database.storyDao().deleteAll()
-                    }
-
-                    val prevKey = if (page == 1) null else page - 1
-                    val nextKey = if (endOfPaginationReached) null else page + 1
-                    val keys = responseData.stories.map {
-                        RemoteKeys(id = it.id, prevKey = prevKey, nextKey = nextKey)
-                    }
-
-                    // Save RemoteKeys information to database
-                    database.remoteKeysDao().insertAll(keys)
-
-                    // Convert StoryResponseItem class to StoryResponseItem class
-                    // We need to convert because the response from API is different from local database Entity
-                    responseData.stories.forEach { storyResponseItem ->
-                        val story = Story(
-                            storyResponseItem.id,
-                            storyResponseItem.name,
-                            storyResponseItem.description,
-                            storyResponseItem.createdAt,
-                            storyResponseItem.photoUrl,
-                            storyResponseItem.lon,
-                            storyResponseItem.lat
-                        )
-
-                        // Save StoryResponseItem to the local database
-                        database.storyDao().insertStory(story)
-                    }
+            database.withTransaction {
+                if (loadType == LoadType.REFRESH) {
+                    database.remoteKeysDao().deleteRemoteKeys()
+                    database.storyDao().deleteAll()
                 }
 
-                return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
+                val prevKey = if (page == 1) null else page - 1
+                val nextKey = if (endOfPaginationReached) null else page + 1
+                val keys = responseData.stories.map {
+                    RemoteKeys(id = it.id, prevKey = prevKey, nextKey = nextKey)
+                }
 
-            } catch (e: Exception) {
-                return MediatorResult.Error(e)
+                database.remoteKeysDao().insertAll(keys)
+
+                responseData.stories.forEach {
+                    val story = Story(
+                        it.id,
+                        it.name,
+                        it.description,
+                        it.createdAt,
+                        it.photoUrl,
+                        it.lon,
+                        it.lat
+                    )
+
+                    database.storyDao().insertStory(story)
+                }
             }
+
+            return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
+
+        } catch (exception: Exception) {
+            return MediatorResult.Error(exception)
         }
     }
 
@@ -92,21 +80,18 @@ class StoryRemoteMediator(
         return InitializeAction.LAUNCH_INITIAL_REFRESH
     }
 
-    // Get RemoteKeys for last item from local database
     private suspend fun getRemoteKeysForLastItem(state: PagingState<Int, Story>): RemoteKeys? {
         return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()?.let { data ->
             database.remoteKeysDao().getRemoteKeysId(data.id)
         }
     }
 
-    // Get RemoteKeys for first item from local database
     private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, Story>): RemoteKeys? {
         return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()?.let { data ->
             database.remoteKeysDao().getRemoteKeysId(data.id)
         }
     }
 
-    // Get RemoteKeys for closest to current position from local database
     private suspend fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, Story>): RemoteKeys? {
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.id?.let { id ->

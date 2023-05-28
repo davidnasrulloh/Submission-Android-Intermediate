@@ -43,9 +43,11 @@ class LoadingStateAdapter(private val retry: () -> Unit) :
                     binding.root.context.getString(R.string.error_occurred_message)
             }
 
-            binding.progressBar.isVisible = loadState is LoadState.Loading
-            binding.retryButton.isVisible = loadState is LoadState.Error
-            binding.errorMsg.isVisible = loadState is LoadState.Error
+            binding?.apply {
+                progressBar.isVisible = loadState is LoadState.Loading
+                retryButton.isVisible = loadState is LoadState.Error
+                errorMsg.isVisible = loadState is LoadState.Error
+            }
         }
     }
 }
