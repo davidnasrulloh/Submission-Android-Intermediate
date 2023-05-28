@@ -10,13 +10,11 @@ import com.davidnasrulloh.sm_intermediate_david.data.local.entity.Story
 import com.davidnasrulloh.sm_intermediate_david.data.local.room.StoryDatabase
 import com.davidnasrulloh.sm_intermediate_david.data.remote.StoryRemoteMediator
 import com.davidnasrulloh.sm_intermediate_david.data.remote.response.FileUploadResponse
-import com.davidnasrulloh.sm_intermediate_david.data.remote.response.StoriesResponse
+import com.davidnasrulloh.sm_intermediate_david.data.remote.response.StoryResponse
 import com.davidnasrulloh.sm_intermediate_david.data.remote.retrofit.ApiService
 import com.davidnasrulloh.sm_intermediate_david.utils.wrapEspressoIdlingResource
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import javax.inject.Inject
@@ -42,7 +40,7 @@ class StoryRepository @Inject constructor(
         ).liveData
     }
 
-    fun getAllStoriesWithLocation(token: String): Flow<Result<StoriesResponse>> = flow {
+    fun getAllStoriesWithLocation(token: String): Flow<Result<StoryResponse>> = flow {
         wrapEspressoIdlingResource {
             try {
                 val bearerToken = generateBearerToken(token)

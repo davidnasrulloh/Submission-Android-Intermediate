@@ -144,8 +144,4 @@ class HomeFragment : Fragment() {
         // Restore last recyclerview state
         recyclerView.layoutManager?.onRestoreInstanceState(recyclerViewState)
     }
-
-
-
-
 }

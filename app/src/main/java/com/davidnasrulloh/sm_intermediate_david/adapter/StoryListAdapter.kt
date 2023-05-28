@@ -19,58 +19,49 @@ import com.davidnasrulloh.sm_intermediate_david.utils.setLocalDateFormat
 
 class StoryListAdapter : PagingDataAdapter<Story, StoryListAdapter.ViewHolder>(DiffCallback) {
 
-    companion object {
-        val DiffCallback = object : DiffUtil.ItemCallback<Story>() {
-            override fun areItemsTheSame(oldItem: Story, newItem: Story): Boolean {
-                return oldItem.id == newItem.id
-            }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(LayoutStoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+    }
 
-            override fun areContentsTheSame(oldItem: Story, newItem: Story): Boolean {
-                return oldItem == newItem
-            }
-        }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        getItem(position)?.let { holder.bind(holder.itemView.context, it) }
     }
 
     class ViewHolder(private val binding: LayoutStoryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(context: Context, story: Story) {
-            binding.apply {
-                tvStoryUsername.text = story.name
-                tvStoryDescription.text = story.description
-                ivStoryImage.setImageFromUrl(context, story.photoUrl)
-                tvStoryDate.setLocalDateFormat(story.createdAt)
+        fun bind(context: Context, storyEntity: Story) {
+            with(binding) {
+                tvStoryUsername.text = storyEntity.name
+                tvStoryDescription.text = storyEntity.description
+                ivStoryImage.setImageFromUrl(context, storyEntity.photoUrl)
+                tvStoryDate.setLocalDateFormat(storyEntity.createdAt)
 
-                // On item clicked
                 root.setOnClickListener {
-                    // Set ActivityOptionsCompat for SharedElement
                     val optionsCompat: ActivityOptionsCompat =
                         ActivityOptionsCompat.makeSceneTransitionAnimation(
                             root.context as Activity,
-                            Pair(ivStoryImage, "story_image"),
-                            Pair(tvStoryUsername, "username"),
-                            Pair(tvStoryDate, "date"),
-                            Pair(tvStoryDescription, "description")
+                            Pair(tvStoryUsername, "story_image"),
+                            Pair(tvStoryDescription, "username"),
+                            Pair(ivStoryImage, "date"),
+                            Pair(tvStoryDate, "description")
                         )
 
-                    Intent(context, DetailStoryActivity::class.java).also { intent ->
-                        intent.putExtra(EXTRA_DETAIL, story)
-                        context.startActivity(intent, optionsCompat.toBundle())
+                    Intent(context, DetailStoryActivity::class.java).apply {
+                        putExtra(EXTRA_DETAIL, storyEntity)
+                        context.startActivity(this, optionsCompat.toBundle())
                     }
                 }
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding =
-            LayoutStoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
-    }
+    companion object {
+        val DiffCallback = object : DiffUtil.ItemCallback<Story>() {
+            override fun areItemsTheSame(oldItem: Story, newItem: Story): Boolean =
+                oldItem.id == newItem.id
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val story = getItem(position)
-        if (story != null) {
-            holder.bind(holder.itemView.context, story)
+            override fun areContentsTheSame(oldItem: Story, newItem: Story): Boolean =
+                oldItem == newItem
         }
     }
 }

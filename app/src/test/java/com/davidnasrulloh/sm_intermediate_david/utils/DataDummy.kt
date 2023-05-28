@@ -5,14 +5,14 @@ import com.davidnasrulloh.sm_intermediate_david.data.remote.response.FileUploadR
 import com.davidnasrulloh.sm_intermediate_david.data.remote.response.LoginResponse
 import com.davidnasrulloh.sm_intermediate_david.data.remote.response.LoginResult
 import com.davidnasrulloh.sm_intermediate_david.data.remote.response.RegisterResponse
-import com.davidnasrulloh.sm_intermediate_david.data.remote.response.StoriesResponse
+import com.davidnasrulloh.sm_intermediate_david.data.remote.response.StoryResponse
 import com.davidnasrulloh.sm_intermediate_david.data.remote.response.StoryResponseItem
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
 object DataDummy {
-    fun generateDummyStoriesResponse(): StoriesResponse {
+    fun generateDummyStoriesResponse(): StoryResponse {
         val error = false
         val message = "Stories fetched successfully"
         val listStoryResponseItem = mutableListOf<StoryResponseItem>()
@@ -31,7 +31,7 @@ object DataDummy {
             listStoryResponseItem.add(story)
         }
 
-        return StoriesResponse(listStoryResponseItem, error, message)
+        return StoryResponse(listStoryResponseItem, error, message)
     }
 
     fun generateDummyListStory(): List<Story> {

@@ -51,9 +51,9 @@ class RegisterFragment : Fragment() {
     }
 
     private fun handleRegister(){
-        val name = binding.edRegisterName.text.toString().trim()
-        val email = binding.edRegisterEmail.text.toString().trim()
-        val password = binding.edRegisterPassword.text.toString()
+        val name = binding.edtRegisterName.text.toString().trim()
+        val email = binding.edtRegisterEmail.text.toString().trim()
+        val password = binding.edtRegisterPassword.text.toString()
         setLoadingState(true)
 
         lifecycleScope.launchWhenResumed {
@@ -84,9 +84,9 @@ class RegisterFragment : Fragment() {
 
     private fun setLoadingState(isLoading: Boolean){
         binding.apply {
-            edRegisterEmail.isEnabled = !isLoading
-            edRegisterPassword.isEnabled = !isLoading
-            edRegisterName.isEnabled = !isLoading
+            edtRegisterEmail.isEnabled = !isLoading
+            edtRegisterPassword.isEnabled = !isLoading
+            edtRegisterName.isEnabled = !isLoading
             btnRegister.isEnabled = !isLoading
 
             if(isLoading){
